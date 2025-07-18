@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.ConfigureCors();
 builder.Services.AddControllers();
 
