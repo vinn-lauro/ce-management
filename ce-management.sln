@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Cont
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Logger", "Service.Logger\Service.Logger.csproj", "{3C12A146-FD58-4158-87F1-1C7D745BDAF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{4CCBC8E3-2A47-4915-AAA9-BB8C7BB7D161}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{3C12A146-FD58-4158-87F1-1C7D745BDAF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C12A146-FD58-4158-87F1-1C7D745BDAF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C12A146-FD58-4158-87F1-1C7D745BDAF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CCBC8E3-2A47-4915-AAA9-BB8C7BB7D161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CCBC8E3-2A47-4915-AAA9-BB8C7BB7D161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CCBC8E3-2A47-4915-AAA9-BB8C7BB7D161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CCBC8E3-2A47-4915-AAA9-BB8C7BB7D161}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
