@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Service.Logger\Service.Logger.csproj" />
+    <ProjectReference Include="..\Repository\Repository.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
