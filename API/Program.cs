@@ -1,4 +1,5 @@
 using API.Extensions;
+using API.Handler;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog;
 
@@ -12,11 +13,13 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
 var app = builder.Build();
 
+app.UseExceptionHandler(options => { });
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
