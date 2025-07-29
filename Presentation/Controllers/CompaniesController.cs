@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ModelBinders;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -26,7 +27,7 @@ public class CompaniesController : ControllerBase
     }
 
     [HttpGet("collection/({ids})", Name = "CompanyCollection")]
-    public IActionResult GetCompanyCollection(IEnumerable<Guid> ids)
+    public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
     {
         var companies = _service.CompanyService.GetByIds(ids, trackChanges: false);
         return Ok(companies);
