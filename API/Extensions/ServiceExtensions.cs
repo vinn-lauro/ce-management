@@ -1,3 +1,4 @@
+using API.Formatter;
 using Contracts;
 using Microsoft.EntityFrameworkCore;
 using Repository;
@@ -29,4 +30,7 @@ public static class ServiceExtensions
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<RepositoryContext>(
             opts => opts.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+    public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
+        builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 }
