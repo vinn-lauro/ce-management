@@ -14,7 +14,11 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
-builder.Services.AddControllers()
+builder.Services.AddControllers(configuration =>
+{
+    configuration.RespectBrowserAcceptHeader = true;
+    configuration.ReturnHttpNotAcceptable = true;
+})
     .AddXmlDataContractSerializerFormatters()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
