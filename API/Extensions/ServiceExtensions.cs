@@ -16,6 +16,7 @@ public static class ServiceExtensions
                 builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
+                .WithExposedHeaders("X-Pagination")
         ));
 
     public static void ConfigureLoggerService(this IServiceCollection services) =>
