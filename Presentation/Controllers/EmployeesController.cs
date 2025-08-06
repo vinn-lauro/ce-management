@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Presentation.ActionFilters;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
@@ -16,6 +17,7 @@ public class EmployeesController : ControllerBase
     public EmployeesController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
     public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
     {
         var pagedResult = await _service.EmployeeService.GetEmployeesAsync(companyId, employeeParameters, trackChanges: false);
