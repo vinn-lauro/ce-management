@@ -12,7 +12,7 @@ internal sealed class CompanyService : ICompanyService
     private readonly IRepositoryManager _repository;
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
-    public CompanyService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+    public CompanyService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, IDataShaper<EmployeeDto> dataShaper)
     {
         _repository = repository;
         _logger = logger;
