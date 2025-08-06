@@ -1,3 +1,4 @@
+using System.Dynamic;
 using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
@@ -13,11 +14,13 @@ internal sealed class EmployeeService : IEmployeeService
     private readonly IRepositoryManager _repository;
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
-    public EmployeeService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper)
+    private readonly IDataShaper<EmployeeDto> _dataShaper;
+    public EmployeeService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, IDataShaper<EmployeeDto> dataShaper)
     {
         _repository = repository;
         _logger = logger;
         _mapper = mapper;
+        _dataShaper = dataShaper;
     }
 
     public async Task<EmployeeDto> CreateEmployeeForCompanyAsync(Guid companyId, EmployeeForCreationDto employeeForCreation, bool trackChanges)
@@ -54,14 +57,15 @@ internal sealed class EmployeeService : IEmployeeService
         return (employeeToPatch, employeeEntity);
     }
 
-    public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
+    public async Task<(IEnumerable<ExpandoObject> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
     {
         if (!employeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
         await CheckIfCompanyExists(companyId, trackChanges);
         var employeesWithMetaData = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges);
         var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetaData);
-        return (employees: employeesDto, metaData: employeesWithMetaData.MetaData);
+        var shapedData = _dataShaper.ShapeData(employeesDto, employeeParameters.Fields);
+        return (employees: shapedData, metaData: employeesWithMetaData.MetaData);
     }
 
     public async Task SaveChangesForPatchAsync(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)
