@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Presentation.ModelBinders;
@@ -6,6 +7,7 @@ using Shared.DataTransferObjects;
 
 namespace Controllers;
 
+[ApiVersion("1.0")]
 [Route("api/[controller]")]
 [ApiController]
 public class CompaniesController : ControllerBase
