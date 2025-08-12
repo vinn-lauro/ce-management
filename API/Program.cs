@@ -28,6 +28,7 @@ builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 builder.Services.AddCustomMediaTypes();
 builder.Services.ConfigureVersioning();
+builder.Services.ConfigureOutputCaching();
 builder.Services.AddControllers(configuration =>
 {
     configuration.RespectBrowserAcceptHeader = true;
@@ -51,6 +52,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 
 app.UseCors("CorsPolicy");
+
+app.UseOutputCache();
 
 app.UseAuthorization();
 
