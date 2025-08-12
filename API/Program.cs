@@ -27,6 +27,7 @@ builder.Services.AddScoped<ValidateMediaTypeAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 builder.Services.AddCustomMediaTypes();
+builder.Services.ConfigureVersioning();
 builder.Services.AddControllers(configuration =>
 {
     configuration.RespectBrowserAcceptHeader = true;
