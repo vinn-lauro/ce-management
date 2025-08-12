@@ -64,4 +64,8 @@ public static class ServiceExtensions
             options.AssumeDefaultVersionWhenUnspecified = true;
             options.DefaultApiVersion = new ApiVersion(1, 0);
         }).AddMvc();
+
+    public static void ConfigureOutputCaching(this IServiceCollection services) =>
+        services.AddOutputCache();
+
 }
