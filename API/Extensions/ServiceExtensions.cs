@@ -1,4 +1,5 @@
 using API.Formatter;
+using Asp.Versioning;
 using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -56,4 +57,11 @@ public static class ServiceExtensions
         });
     }
 
+    public static void ConfigureVersioning(this IServiceCollection services) =>
+        services.AddApiVersioning(options =>
+        {
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+        }).AddMvc();
 }
